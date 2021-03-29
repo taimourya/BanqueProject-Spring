@@ -21,9 +21,11 @@ public class Compte {
     private Collection<Operation> operations;
 
 
-    public Compte(double solde, Date date) {
+    public Compte(String code, double solde, Date date, Client client) {
+        this.code = code;
         this.solde = solde;
         this.date = date;
+        this.client = client;
     }
 
     public Compte() {

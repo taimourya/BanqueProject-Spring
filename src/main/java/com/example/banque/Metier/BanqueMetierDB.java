@@ -28,7 +28,7 @@ public class BanqueMetierDB implements IBanqueMetier{
     @Override
     public Compte consulterCompte(String codeCpt) {
         Optional<Compte> cp = compteRepository.findById(codeCpt);
-        if(!cp.isPresent())
+        if(cp.isEmpty())
             throw new RuntimeException("compte introuvable");
         return cp.get();
     }

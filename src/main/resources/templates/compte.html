@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="alert alert-danger" role="alert" th:if="${exception}">
+            <span th:text="${exception.getMessage()}"></span>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        Compte recherche
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/}" method="get">
+                            <div>
+                                <label>Code Cpte:</label> <input type="text" name="codeCompte"
+                                                                 th:value="${codeCompte}" />
+                                <button type="submit" class="btn btn-primary">Recherche</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card" th:if="${compte}">
+                    <div class="card-header">Opération sur le compte</div>
+                    <div class="card-body">
+                        <form th:action="@{/saveOperation}" method="post">
+                            <div>
+                                <label>Compte</label> <input type="hidden" name="codeCompte"
+                                                             th:value="${codeCompte}" /> <label th:text="${codeCompte}"></label>
+                            </div>
+                            <div>
+                                <input type="radio" name="typeOperation" value="VERS"
+                                       checked="checked"
+                                       onChange="document.getElementById('forVirement').style.display='none'" />
+                                <label>Versement</label> <input type="radio"
+                                                                name="typeOperation" value="RETR"
+                                                                onChange="document.getElementById('forVirement').style.display='none'" />
+                                <label>Retrait</label> <input type="radio" name="typeOperation"
+                                                              value="VIR"
+                                                              onChange="document.getElementById('forVirement').style.display='block'" />
+                                <label>Virement</label>
+                            </div>
+                            <div id="forVirement" style="display: none">
+                                <label>Vers :</label> <input type="text" name="codeCompte2" />
+                            </div>
+                            <div>
+                                <label>Montant :</label> <input type="text" name="montant" />
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-4">
+                <div class="card" th:if="${compte}">
+                    <div class="card-header">
+                        Information compte
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Code : <span th:text="${compte.code}" ></span> </h5>
+                        <h5 class="card-title">Client : <span th:text="${compte.client.nom}" ></span> </h5>
+                        <h5 class="card-title">Solde : <span th:text="${compte.solde}" ></span> DH </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-4">
+                <div class="card" th:if="${operations}">
+                    <div class="card-header">
+                        Liste d'operations
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Num</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Montant</th>
+                            </tr>
+                            <tr th:each="o:${operations}">
+                                <td th:text="${o.numero}"></td>
+                                <td></td>
+                                <td th:text="${o.dateOperation}"></td>
+                                <td th:text="${o.montant}"></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

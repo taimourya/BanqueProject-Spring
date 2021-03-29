@@ -3,7 +3,6 @@ package com.example.banque.Metier;
 import com.example.banque.Model.Compte;
 import com.example.banque.Model.Operation;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface IBanqueMetier {
