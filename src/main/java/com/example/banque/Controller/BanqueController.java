@@ -15,7 +15,6 @@ public class BanqueController {
 
     @GetMapping("/")
     public String consulterCompte(Model model, String codeCompte){
-        System.out.println("code : " + codeCompte);
         model.addAttribute("codeCompte", codeCompte);
         try {
             Compte cp = banqueMetier.consulterCompte(codeCompte);

@@ -87,7 +87,7 @@
                             </tr>
                             <tr th:each="o:${operations}">
                                 <td th:text="${o.numero}"></td>
-                                <td></td>
+                                <td  th:text="${o.class.simpleName}"></td>
                                 <td th:text="${o.dateOperation}"></td>
                                 <td th:text="${o.montant}"></td>
                             </tr>
