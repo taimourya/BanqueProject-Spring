@@ -69,6 +69,7 @@ public class BanqueMetierDB implements IBanqueMetier{
 
     @Override
     public List<Operation> listOperation(String codeCpt) {
-        return operationRepository.findAll();
+        Compte cp = consulterCompte(codeCpt);
+        return (List<Operation>)cp.getOperations();
     }
 }
